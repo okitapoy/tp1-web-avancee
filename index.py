@@ -21,6 +21,7 @@ def valider_date(la_date):
         datetime.datetime.strptime(la_date,'%Y-%m-%d')
     except ValueError:
         valide = 0
+        #print("DATE INVALIDE")
        # raise ValueError("data non valideeeeee")
     finally:
         return valide
@@ -44,8 +45,10 @@ def close_connection(exception):
 @app.route('/')
 def page_acceuil():
     db = get_db()
+    #rows = db.get_article_complet()
+    if(valider_date("eee2020-02-23") is 1):
+        db.add_article("ajout 1","id ajout1","aut ajout1","2020-02-23","ajout para 1")
     rows = db.get_article_complet()
-
     for row in rows:
         #if(row['id'] is 1):
         print(row)
