@@ -34,3 +34,10 @@ class Database:
                         " order by datetime(date_publication) DESC limit 5")
         article = [dict(row) for row in cursor.fetchall()]
         return article
+
+
+    def get_article_texte(self,expression):
+        cursor = self.get_connection().cursor()
+        cursor.execute("select * from article where titre or paragraphe like ?", ('%'+expression+'%',))
+        article = [dict(row) for row in cursor.fetchall()]
+        return article

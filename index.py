@@ -46,12 +46,23 @@ def close_connection(exception):
 def page_acceuil():
     db = get_db()
     #rows = db.get_article_complet()
-    if(valider_date("eee2020-02-23") is 1):
-        db.add_article("ajout 1","id ajout1","aut ajout1","2020-02-23","ajout para 1")
+    #if(valider_date("eee2020-02-23") is 1):
+        #db.add_article("ajout 1","id ajout1","aut ajout1","2020-02-23","ajout para 1")
     rows = db.get_article_complet()
-    for row in rows:
-        #if(row['id'] is 1):
-        print(row)
-    return ("page acceuil")
+    return render_template('accueil.html', articles_recent=rows)
 
+
+@app.route('/texte')
+def expression_chercher():
+    db = get_db()
+    rows = db.get_article_texte("ajout")
+    for row in rows:
+        print(row)
+    return("pade du texte expression")
+
+
+@app.route('/article/<identifiant>')
+def afficher_un_article(identifiant):
+    print(identifiant)
+    return("page article en vue")
 

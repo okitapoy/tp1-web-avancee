@@ -1,0 +1,37 @@
+{% extends "squelette.html" %}
+
+{%block titre%}Page d'accueil{% endblock %}
+
+{%block corps %}
+
+<form action="/article/article">
+  <label for="article">Chercher un article :</label><br>
+  <input type="text" id="article" name="article">
+  <input type="submit" value="Chercher">
+</form>
+
+<h1>Articles recents</h1>
+
+<table style="width:100">
+  <tr>
+    <th>ID</th>
+    <th>TITRE</th>
+    <th>IDENTIFIANT</th>
+    <th>AUTEUR</th>
+    <th>DATE DE PUBLICATION</th>
+    <th>PARAGRAPHE</th>
+  </tr>
+
+{% for article in articles_recent %}
+  <tr>
+    <td>{{article['id']}}</td>
+    <td>{{article['titre']}}</td>
+    <td>{{article['identifiant']}}</td>
+    <td>{{article['auteur']}}</td>
+    <td>{{article['date_publication']}}</td>
+    <td>{{article['paragraphe']}}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock %}
