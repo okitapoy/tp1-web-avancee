@@ -1,0 +1,33 @@
+{% extends "accueil.html" %}
+
+{% block titre %}Page resulat recherch{% endblock %}
+
+
+
+{% block resultat %}
+<h1>Resultat de la recherche</h1>
+
+
+{% if resultat_recherche|length %}
+
+<table style="width:100">
+  <tr>
+    <th>TITRE</th>
+    <th>DATE DE PUBLICATION</th>
+  </tr>
+
+{% for article in resultat_recherche %}
+  <tr>
+    <td>{{article['titre']}}</td>
+    <td>{{article['date_publication']}}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% else %}
+
+<p>Aucun article.</p>
+
+{% endif %}
+
+{% endblock %}

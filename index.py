@@ -52,13 +52,26 @@ def page_acceuil():
     return render_template('accueil.html', articles_recent=rows)
 
 
-@app.route('/texte')
+@app.route('/texte',methods=['GET','POST'])
 def expression_chercher():
     db = get_db()
-    rows = db.get_article_texte("ajout")
-    for row in rows:
-        print(row)
-    return("pade du texte expression")
+    recherche = db.get_article_texte(request.args['le_texte'])
+    return render_template("recherche.html", resultat_recherche=recherche)
+
+
+@app.route('/admin')
+def page_admin():
+    db = get_db()
+    liste = db.get_liste_complete()
+    print("page admin")
+    return render_template("admin.html",liste_complete = liste)
+
+
+@app.route('/modification')
+def page_modification():
+    id = request.args['id']
+    print(id)
+    return ("page modification")
 
 
 @app.route('/article/<identifiant>')

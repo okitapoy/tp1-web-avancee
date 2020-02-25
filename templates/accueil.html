@@ -1,15 +1,21 @@
 {% extends "squelette.html" %}
 
-{%block titre%}Page d'accueil{% endblock %}
+{% block titre%}Page d'accueil{% endblock %}
 
-{%block corps %}
+{% block corps %}
 
-<form action="/article/article">
-  <label for="article">Chercher un article :</label><br>
-  <input type="text" id="article" name="article">
+
+<form action="/texte">
+  <label for="le_texte">Chercher un article :</label><br>
+  <input type=<"text" id="le_texte" name="le_texte">
   <input type="submit" value="Chercher">
 </form>
 
+<form action="/admin">
+  <input type="submit" value="Page admin">
+</form>
+
+{% block resultat %}
 <h1>Articles recents</h1>
 
 <table style="width:100">
@@ -34,4 +40,5 @@
 {% endfor %}
 </table>
 
+{% endblock %}
 {% endblock %}
