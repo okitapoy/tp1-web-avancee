@@ -8,6 +8,7 @@ from flask import g
 from flask import request
 from flask import redirect
 from flask import Response
+from flask import url_for
 from .database import Database
 #import uuid
 import datetime
@@ -70,12 +71,70 @@ def page_admin():
 @app.route('/modification')
 def page_modification():
     id = request.args['id']
-    print(id)
-    return ("page modification")
 
+    
+    
+
+    db = get_db()
+    rows = db.get_liste_complete()
+    for row in rows:
+        if (row['id'] is 1):
+            db.modifier_article("gogogogog","chahahaha 1",1)
+    return render_template("/modifier.html", target_id = id)
+
+
+@app.route('/traiter_modification', methods=['GET','POST'])
+def traiter_modification():
+    if request.method == 'POST':
+        db = get_db()
+        db.modifier_article(request.form['new_titre'],
+        request.form['new_paragraphe'],request.args['id'])
+        liste = db.get_liste_complete()
+        return redirect(url_for('page_admin'))
+    else:
+        return redirect(url_for('page_admin'))
+
+
+
+
+@app.route('/ajouter')
+def ajouter_article():
+
+    return render_template("ajouter.html")
+
+
+@app.route('/formulaire', methods=['GET','POST'])
+def formualire():
+    errors = []
+    if request.method == 'GET':
+        return render_template("ajouter.html")
+    else:
+        titre = request.form['titre']
+        identifiant = request.form['identifiant']
+        auteur = request.form['auteur']
+        date_publication = request.form['date_publication']
+        paragraphe = request.form['paragraphe']
+
+    if(titre == "" or identifiant == "" or auteur == ""
+    or date_publication == "" or paragraphe == ""):
+        errors.append("Tous les champs sont obligatoires")
+
+    if(valider_date(date_publication) is 0):
+        errors.append("La date doit etre de format AAAA-MM-JJ")
+
+    if(len(errors) == 0):
+        print("ajout resssssssuiieiieie")
+        db = get_db()
+        db.add_article(titre,identifiant,auteur,
+        date_publication,paragraphe)
+        return redirect(url_for('page_admin',
+        confirmer=titre))
+    else:
+        return render_template('ajouter.html',liste_errors = errors)
 
 @app.route('/article/<identifiant>')
 def afficher_un_article(identifiant):
     print(identifiant)
     return("page article en vue")
+
 

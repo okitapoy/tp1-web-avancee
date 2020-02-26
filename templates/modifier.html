@@ -1,0 +1,17 @@
+post{% extends "squelette.html" %}
+
+<h1>Modification de l'article</h1>
+
+{% block corps %}
+<h1>Modification de l'article</h1>
+
+<form action="/traiter_modification?id={{target_id}}" method="POST">
+  <label for="new_titre">Entrer le nouveau titre :</label><br>
+  <input type="text" id="new_titre" name="new_titre"><br>
+  <label for="new_paragraphe">Entrer le nouveau paragraphe :</label><br>
+  <input type="text" id="new_paragraphe" name="new_paragraphe"><br>
+  <input type="submit" value="Soumettre">
+</form>
+
+
+{% endblock %}

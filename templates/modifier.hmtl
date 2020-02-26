@@ -1,7 +1,0 @@
-{% extends "squelette.html" %}
-
-<h1>Modification de l'article</h1>
-
-{% block corps %}
-
-{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "squelette.html" %}
+
+
+{% block titre %}Page d'ajout d'article{% endblock %}
+
+{% block corps %}
+
+<h1>Ajout d'un article</h1>
+
+{% if liste_errors %}
+<ul>
+ {% for error in liste_errors %}
+  <li>{{error}}</li>
+ {% endfor %}
+</ul>
+{% endif %}
+
+<form action="/formulaire" method="POST">
+  <label for="titre">Titre</label>&nbsp;
+  <input type="text" id="titre" name="titre"><br>
+
+  <label for="identifiant">Identifiant</label>&nbsp;
+  <input type="text" id="identifiant" name="identifiant"><br>
+
+  <label for="auteur">Auteur</label>&nbsp;
+  <input type="text" id="auteur" name="auteur"><br>
+
+  <label for="date_publication">Date de publication(AAAA-MM-JJ)</label>&nbsp;
+  <input type="text" id="date_publication" name="date_publication"><br>
+
+  <label for="paragraphe">Paragraphe</label>&nbsp;
+  <input type="textarea" id="paragraphe" name="paragraphe"><br>
+
+  <input type="submit" value="Soumettre">
+</form>
+
+
+{% endblock %}

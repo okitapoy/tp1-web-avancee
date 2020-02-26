@@ -49,3 +49,9 @@ class Database:
         cursor.execute("select * from article")
         article = [dict(row) for row in cursor.fetchall()]
         return article
+
+
+    def modifier_article(self,nouv_titre,nouv_paragraphe,target_id):
+        connection = self.get_connection()
+        connection.execute(("update article set titre = ?, paragraphe = ? where id = ?"),(nouv_titre,nouv_paragraphe,target_id))
+        connection.commit()
