@@ -135,6 +135,14 @@ def formualire():
 @app.route('/article/<identifiant>')
 def afficher_un_article(identifiant):
     print(identifiant)
-    return("page article en vue")
+
+    db = get_db()
+    rows = db.chercher_article(identifiant)
+    if(len(rows) > 0):
+        print(rows[0])
+        return render_template('article.html',article=rows[0])
+    else:
+        print("pas trouveeeeee")
+    return render_template("404.html"),404
 
 

@@ -38,7 +38,7 @@ class Database:
 
     def get_article_texte(self,expression):
         cursor = self.get_connection().cursor()
-        cursor.execute("select * from article where titre or paragraphe like ?", ('%'+expression+'%',))
+        cursor.execute("select * from article where titre like ? or paragraphe like ?", ('%'+expression+'%','%'+expression+'%',))
         article = [dict(row) for row in cursor.fetchall()]
         return article
 
@@ -55,3 +55,10 @@ class Database:
         connection = self.get_connection()
         connection.execute(("update article set titre = ?, paragraphe = ? where id = ?"),(nouv_titre,nouv_paragraphe,target_id))
         connection.commit()
+
+
+    def chercher_article(self,identifiant_url):
+        cursor = self.get_connection().cursor()
+        cursor.execute("select * from article where identifiant = ?",(identifiant_url,))
+        article = [dict(row) for row in cursor.fetchall()]
+        return article

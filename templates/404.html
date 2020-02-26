@@ -1,0 +1,17 @@
+{% extends "squelette.html" %}
+
+{% block titre%}Page d'un article{% endblock %}
+
+{% block corps %}
+
+<form action="/admin">
+  <input type="submit" value="Page admin">
+</form>
+
+
+{% block resultat %}
+<h1>404 article introuvable</h1>
+
+
+{% endblock %}
+{% endblock %}

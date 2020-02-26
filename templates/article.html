@@ -1,0 +1,36 @@
+{% extends "squelette.html" %}
+
+{% block titre%}Page d'un article{% endblock %}
+
+{% block corps %}
+
+<form action="/admin">
+  <input type="submit" value="Page admin">
+</form>
+
+
+{% block resultat %}
+<h1>Article</h1>
+
+<table style="width:100">
+  <tr>
+    <th>ID</th>
+    <th>TITRE</th>
+    <th>IDENTIFIANT</th>
+    <th>AUTEUR</th>
+    <th>DATE DE PUBLICATION</th>
+    <th>PARAGRAPHE</th>
+  </tr>
+
+  <tr>
+    <td>{{article['id']}}</td>
+    <td>{{article['titre']}}</td>
+    <td>{{article['identifiant']}}</td>
+    <td>{{article['auteur']}}</td>
+    <td>{{article['date_publication']}}</td>
+    <td>{{article['paragraphe']}}</td>
+  </tr>
+</table>
+
+{% endblock %}
+{% endblock %}
