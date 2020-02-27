@@ -1,17 +1,35 @@
-post{% extends "squelette.html" %}
+{% extends "squelette.html" %}
 
 <h1>Modification de l'article</h1>
 
 {% block corps %}
 <h1>Modification de l'article</h1>
 
-<form action="/traiter_modification?id={{target_id}}" method="POST">
-  <label for="new_titre">Entrer le nouveau titre :</label><br>
-  <input type="text" id="new_titre" name="new_titre"><br>
-  <label for="new_paragraphe">Entrer le nouveau paragraphe :</label><br>
-  <input type="text" id="new_paragraphe" name="new_paragraphe"><br>
-  <input type="submit" value="Soumettre">
-</form>
+<div class="container">
+  <form action="/traiter_modification?id={{target_id}}" method="POST">
 
+    <div class="row">
+     <div class="col-25">
+       <label for="new_titre">Entrer le nouveau titre</label>
+     </div>
+     <div class="col-75">
+       <input type="text" id="new_titre" name="new_titre" onkeydown="return event.key != 'Enter';">
+     </div> 
+    </div>
+
+    <div class="row">
+     <div class="col-25">
+       <label for="new_paragraphe">Entrer le nouveau paragraphe</label>
+     </div>
+     <div class="col-75">
+       <textarea id="new_paragraphe" name="new_paragraphe" style="height:200px"></textarea>
+     </div>
+    </div>
+
+     <div class="row">
+       <input type="submit" value="Soumettre">
+     </div>
+  </form>
+</div>
 
 {% endblock %}

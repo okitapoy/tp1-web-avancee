@@ -82,6 +82,11 @@ def page_modification():
             db.modifier_article("gogogogog","chahahaha 1",1)
     return render_template("/modifier.html", target_id = id)
 
+@app.route('/confirmer')
+def confirmer():
+    return render_template("/confirmation.html",confirmer=request.args['action'])
+
+
 
 @app.route('/traiter_modification', methods=['GET','POST'])
 def traiter_modification():
@@ -90,7 +95,7 @@ def traiter_modification():
         db.modifier_article(request.form['new_titre'],
         request.form['new_paragraphe'],request.args['id'])
         liste = db.get_liste_complete()
-        return redirect(url_for('page_admin'))
+        return redirect(url_for('confirmer',action=1))
     else:
         return redirect(url_for('page_admin'))
 
@@ -106,6 +111,7 @@ def ajouter_article():
 @app.route('/formulaire', methods=['GET','POST'])
 def formualire():
     errors = []
+    valeurs = []
     if request.method == 'GET':
         return render_template("ajouter.html")
     else:
@@ -115,6 +121,12 @@ def formualire():
         date_publication = request.form['date_publication']
         paragraphe = request.form['paragraphe']
 
+        valeurs.append(titre)
+        valeurs.append(identifiant)
+        valeurs.append(auteur)
+        valeurs.append(date_publication)
+        valeurs.append(paragraphe)
+
     if(titre == "" or identifiant == "" or auteur == ""
     or date_publication == "" or paragraphe == ""):
         errors.append("Tous les champs sont obligatoires")
@@ -123,14 +135,12 @@ def formualire():
         errors.append("La date doit etre de format AAAA-MM-JJ")
 
     if(len(errors) == 0):
-        print("ajout resssssssuiieiieie")
         db = get_db()
         db.add_article(titre,identifiant,auteur,
         date_publication,paragraphe)
-        return redirect(url_for('page_admin',
-        confirmer=titre))
+        return redirect(url_for('confirmer',action=0))
     else:
-        return render_template('ajouter.html',liste_errors = errors)
+        return render_template('ajouter.html',liste_errors = errors,donnees = valeurs)
 
 @app.route('/article/<identifiant>')
 def afficher_un_article(identifiant):

@@ -2,9 +2,15 @@
 
 {% block titre %}Page admin{% endblock %}
 
+
+{% block admin %}
+<a href="/ajouter">AJOUTER UN ARTICLE</a>
+{% endblock %}
+
+
 {% block corps %}
-<br>      
-<button onclick="location.href='/ajouter'" type="button">Ajouter un article</button>
+
+
 
 {% if confirmer is defined and confirmer|length %}
 <h4>{{confirmer}}</h4>
@@ -21,10 +27,10 @@
 
 {% for article in liste_complete %}
   <tr>
-    <td>{{article['titre']}}</td>
+    <td style="cursor:pointer" onclick="location.href='/article/{{article['identifiant']}}'">{{article['titre']}}</td>
     <td>{{article['date_publication']}}</td>
     <td>
-      <button onclick="location.href='/modification?id={{article['id']}}'" type="button">MODFIER</button>
+      <button class="button" onclick="location.href='/modification?id={{article['id']}}'" type="button">MODFIER</button>
     </td>
   </tr>
 {% endfor %}

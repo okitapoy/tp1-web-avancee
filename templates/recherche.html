@@ -17,7 +17,7 @@
   </tr>
 
 {% for article in resultat_recherche %}
-  <tr>
+  <tr style="cursor:pointer" onclick="location.href='/article/{{article['identifiant']}}'">
     <td>{{article['titre']}}</td>
     <td>{{article['date_publication']}}</td>
   </tr>

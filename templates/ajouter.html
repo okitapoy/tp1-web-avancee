@@ -10,29 +10,127 @@
 {% if liste_errors %}
 <ul>
  {% for error in liste_errors %}
-  <li>{{error}}</li>
+  <li style="color:red">{{error}}</li>
  {% endfor %}
 </ul>
 {% endif %}
 
-<form action="/formulaire" method="POST">
-  <label for="titre">Titre</label>&nbsp;
-  <input type="text" id="titre" name="titre"><br>
+{% set test = "allo" %}
 
-  <label for="identifiant">Identifiant</label>&nbsp;
-  <input type="text" id="identifiant" name="identifiant"><br>
+{% if donnees %}
+<div class="container">
 
-  <label for="auteur">Auteur</label>&nbsp;
-  <input type="text" id="auteur" name="auteur"><br>
+ <form action="/formulaire" method="POST">
 
-  <label for="date_publication">Date de publication(AAAA-MM-JJ)</label>&nbsp;
-  <input type="text" id="date_publication" name="date_publication"><br>
+   <div class="row">
+    <div class="col-25"> 
+     <label for="titre">Titre</label>
+    </div>
+    <div class="col-75"> 
+     <input type="text" id="titre" name="titre" value="{{donnees[0]}}" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
 
-  <label for="paragraphe">Paragraphe</label>&nbsp;
-  <input type="textarea" id="paragraphe" name="paragraphe"><br>
+   <div class="row">
+    <div class="col-25">
+     <label for="identifiant">Identifiant</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="identifiant" name="identifiant" value="{{donnees[1]}}" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
 
-  <input type="submit" value="Soumettre">
-</form>
+   <div class="row">
+    <div class="col-25">
+     <label for="auteur">Auteur</label>
+    </div> 
+    <div class="col-75">
+     <input type="text" id="auteur" name="auteur" value="{{donnees[2]}}" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
 
+   <div class="row">
+    <div class="col-25">
+     <label for="date_publication">Date de publication(AAAA-MM-JJ)</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="date_publication" name="date_publication" value="{{donnees[3]}}" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="col-25">
+     <label for="paragraphe">Paragraphe</label>
+    </div>
+    <div class="col-75">
+     <textarea id="paragraphe" name="paragraphe" value="{{donnees[4]}}" style="height:200px"></textarea>
+    </div>
+   </div>
+
+  <div class="row">
+     <input type="submit" value="Soumettre">
+  </div>
+ </form>
+
+</div>
+
+{% else %}
+<div class="container">
+
+ <form action="/formulaire" method="POST">
+
+   <div class="row">
+    <div class="col-25">
+     <label for="titre">Titre</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="titre" name="titre" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="col-25">
+     <label for="identifiant">Identifiant</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="identifiant" name="identifiant" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="col-25">
+     <label for="auteur">Auteur</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="auteur" name="auteur" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="col-25">
+     <label for="date_publication">Date de publication(AAAA-MM-JJ)</label>
+    </div>
+    <div class="col-75">
+     <input type="text" id="date_publication" name="date_publication" onkeydown="return event.key != 'Enter';">
+    </div>
+   </div>
+
+   <div class="row">
+    <div class="col-25">
+     <label for="paragraphe">Paragraphe</label>
+    </div>
+    <div class="col-75">
+     <textarea id="paragraphe" name="paragraphe" style="height:200px"></textarea>
+    </div>
+   </div>
+
+  <div class="row">
+     <input type="submit" value="Soumettre">
+  </div>
+ </form>
+
+</div>
+
+{% endif %}
 
 {% endblock %}

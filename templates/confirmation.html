@@ -1,0 +1,23 @@
+{% extends "squelette.html" %}
+
+{% block titre%}Page d'un article{% endblock %}
+
+{% block corps %}
+
+
+
+{% block resultat %}
+
+{% if confirmer|int == 1 %}
+<h1>Modification de l'article reussie.</h1>
+{% else %}
+<h1>Ajout de l'article reussie.</h1>
+{% endif %}
+
+<p>Utilisez la barre de navigation en haut pour continuer votre navigation sur le site</p>
+
+
+{% endblock %}
+{% endblock %}
+
+

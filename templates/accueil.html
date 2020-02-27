@@ -4,16 +4,6 @@
 
 {% block corps %}
 
-<form action="/admin">
-  <input type="submit" value="Page admin">
-</form>
-
-<form action="/texte">
-  <label for="le_texte">Chercher un article</label>&nbsp;
-  <input type=<"text" id="le_texte" name="le_texte">
-  <input type="submit" value="Chercher">
-</form>
-
 
 {% block resultat %}
 <h1>Articles recents</h1>
@@ -29,7 +19,7 @@
   </tr>
 
 {% for article in articles_recent %}
-  <tr>
+  <tr style="cursor:pointer" onclick="location.href='/article/{{article['identifiant']}}'">
     <td>{{article['id']}}</td>
     <td>{{article['titre']}}</td>
     <td>{{article['identifiant']}}</td>
